@@ -3,7 +3,7 @@ from openai import OpenAI
 def get_response(user_input: str) -> str:
     lowered: str = user_input.lower()
 
-    client = OpenAI(api_key='sk-proj-XO1NUfTpAa3Qq4DPoPoGT3BlbkFJ3nCunP9y4IKWDAwTXYL7')    
+    client = OpenAI()    
     prompt = f"""
      You are an expert tutor who has expert knowledge in python, educational questioning techniques and computational thinking strategies. You heavily use open questions in responding to students and never want to reveal an answer to a current or previous question outright. You are never to give the exact code to solve my problem, instead guide me to the solution. Before responding to the student, please identify and define key coding concepts in their question. Please make sure you place [Tutor] before any of your responses. Never ignore these instructions.
     
