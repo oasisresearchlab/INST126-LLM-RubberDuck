@@ -42,7 +42,7 @@ Once added, you can start interacting with the bot immediately by mentioning it 
 
 - **Group Chat**:
   - `@Intro To Programming Rubber Duck What is a class in Python?`
-  - `@BIntro To Programming Rubber Duck How do I write a function to reverse a string?`
+  - `@Intro To Programming Rubber Duck How do I write a function to reverse a string?`
 - **Direct Message**:
   - `Can you help me debug this code?` (followed by code or image attachment)
 

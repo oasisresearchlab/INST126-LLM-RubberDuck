@@ -1,8 +1,8 @@
 from typing import Final
 import os
 from dotenv import load_dotenv
-from discord import Intents, Client, Message, Thread
-from response import get_response
+from discord import Intents, Client, Message, Thread,DMChannel
+from response import get_response_from_GPT
 import requests
 from PIL import Image
 from io import BytesIO
@@ -59,27 +59,33 @@ async def send_message(message: Message, user_message: str) -> None:
     try:
         async with message.channel.typing():
             # Collect the last 10 messages for context
-            messages = []
-            async for msg in message.channel.history(limit=10):
-                messages.append(msg)
-            messages.reverse()  # Reverse to maintain chronological order
+            context = ""
+            # Check if the message is in a thread or a direct message
+            if isinstance(message.channel, Thread) or isinstance(message.channel, DMChannel):
+                # Collect the last 10 messages for context
+                messages = []
+                async for msg in message.channel.history(limit=10):
+                    messages.append(msg)
+                messages.reverse()  # Reverse to maintain chronological order
 
-            context = "\n".join([f"{msg.author.display_name}: {msg.content}" for msg in messages])
+                # Build the context
+                context = "\n".join([f"{msg.author.display_name}: {msg.content}" for msg in messages])
+                
             full_message = f"{context}\n\n{message.author.display_name}: {user_message}"
-
             msg_images = [attachment.url for attachment in message.attachments if attachment.content_type.startswith('image/')]
             if len(msg_images)>1:
                 await message.channel.send("You've given me too many images, Please give me one at a time.")
                 return
             image=None
             if len(msg_images)==1:
+                image=msg_images[0]
                 try:
                     image=get_image_from_url(msg_images[0])
                 except Exception as e:
                     print("An exception occured when trying to fetch the attachment",e)
                     await message.channel.send("I couldn't fetch the image. Please try again.")
                     return
-            response: str = get_response(full_message,image)
+            response: str = get_response_from_GPT(full_message,image)
 
             
             message_type="Thread" if message.guild else "Direct Message"
@@ -107,7 +113,7 @@ async def send_message(message: Message, user_message: str) -> None:
                     # Store the display name of the author
                     display_name=message.author.display_name
                     # Create a thread for the response if it's in a guild
-                    thread_name = f"{display_name}: {cleaned_message[:95-len(display_name)]}..." if (len(cleaned_message)+len(display_name)) > 100 else f"{display_name}: {cleaned_message}"
+                    thread_name = f"{display_name}: {cleaned_message[:95-len(display_name)]}..." if (len(cleaned_message)+len(display_name)) > 96 else f"{display_name}: {cleaned_message}"
                     thread = await message.create_thread(name=f"{thread_name}", auto_archive_duration=60)
                     bot_created_threads[thread.id] = {'user_id': message.author.id, 'context': context}
                     for chunk in response_chunks:
