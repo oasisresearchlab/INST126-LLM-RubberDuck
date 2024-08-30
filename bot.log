@@ -1,0 +1,266 @@
+2024-08-29 11:01:02,101 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-29 11:01:02,102 - INFO - logging in using static token
+2024-08-29 11:01:03,068 - INFO - Shard ID None has connected to Gateway (Session ID: 15eeeab38d9ab5d527b24c6f7a9ee1a5).
+2024-08-29 11:03:06,898 - INFO - Shard ID None has successfully RESUMED session 15eeeab38d9ab5d527b24c6f7a9ee1a5.
+2024-08-29 11:06:21,624 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-29 11:06:21,626 - INFO - logging in using static token
+2024-08-29 11:06:22,288 - INFO - Shard ID None has connected to Gateway (Session ID: 68affb39fd8c9933a7fa5b7c9d0f5ef1).
+2024-08-29 11:07:54,694 - WARNING - Shard ID None heartbeat blocked for more than 10 seconds.
+Loop thread traceback (most recent call last):
+  File "/Users/umeshchandra/discordbot/main.py", line 179, in <module>
+    main()
+  File "/Users/umeshchandra/discordbot/main.py", line 176, in main
+    client.run(TOKEN)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 1987, in _run_once
+    handle._run()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/main.py", line 172, in on_message
+    await send_message(message, user_message)
+  File "/Users/umeshchandra/discordbot/main.py", line 95, in send_message
+    response: str = get_response(full_message,image)
+  File "/Users/umeshchandra/discordbot/response.py", line 52, in get_response
+    response=model.generate_content(prompt)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 827, in generate_content
+    response = rpc(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 76, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1178, in __call__
+    ) = self._blocking(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1162, in _blocking
+    event = call.next_event()
+
+2024-08-29 11:08:04,699 - WARNING - Shard ID None heartbeat blocked for more than 20 seconds.
+Loop thread traceback (most recent call last):
+  File "/Users/umeshchandra/discordbot/main.py", line 179, in <module>
+    main()
+  File "/Users/umeshchandra/discordbot/main.py", line 176, in main
+    client.run(TOKEN)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 1987, in _run_once
+    handle._run()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/main.py", line 172, in on_message
+    await send_message(message, user_message)
+  File "/Users/umeshchandra/discordbot/main.py", line 95, in send_message
+    response: str = get_response(full_message,image)
+  File "/Users/umeshchandra/discordbot/response.py", line 52, in get_response
+    response=model.generate_content(prompt)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 827, in generate_content
+    response = rpc(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 76, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1178, in __call__
+    ) = self._blocking(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1162, in _blocking
+    event = call.next_event()
+
+2024-08-29 11:08:14,705 - WARNING - Shard ID None heartbeat blocked for more than 30 seconds.
+Loop thread traceback (most recent call last):
+  File "/Users/umeshchandra/discordbot/main.py", line 179, in <module>
+    main()
+  File "/Users/umeshchandra/discordbot/main.py", line 176, in main
+    client.run(TOKEN)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 1987, in _run_once
+    handle._run()
+  File "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/main.py", line 172, in on_message
+    await send_message(message, user_message)
+  File "/Users/umeshchandra/discordbot/main.py", line 95, in send_message
+    response: str = get_response(full_message,image)
+  File "/Users/umeshchandra/discordbot/response.py", line 52, in get_response
+    response=model.generate_content(prompt)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 827, in generate_content
+    response = rpc(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/google/api_core/grpc_helpers.py", line 76, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1178, in __call__
+    ) = self._blocking(
+  File "/Users/umeshchandra/discordbot/myenv/lib/python3.12/site-packages/grpc/_channel.py", line 1162, in _blocking
+    event = call.next_event()
+
+2024-08-29 11:08:22,892 - INFO - Shard ID None has successfully RESUMED session 68affb39fd8c9933a7fa5b7c9d0f5ef1.
+2024-08-29 11:10:14,374 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-29 11:10:14,376 - INFO - logging in using static token
+2024-08-29 11:10:15,142 - INFO - Shard ID None has connected to Gateway (Session ID: 5da49608d87582a47af9239ab6fb8c86).
+2024-08-29 11:11:03,071 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-29 11:11:03,074 - INFO - logging in using static token
+2024-08-29 11:11:03,803 - INFO - Shard ID None has connected to Gateway (Session ID: e384f9af9bb6f9f3ee573954d68d02c3).
+2024-08-30 17:58:23,651 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 17:58:23,653 - INFO - logging in using static token
+2024-08-30 17:58:24,244 - INFO - Shard ID None has connected to Gateway (Session ID: 01ee2d0ead465081a3b075f777930aba).
+2024-08-30 18:21:54,663 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:21:54,666 - INFO - logging in using static token
+2024-08-30 18:21:55,490 - INFO - Shard ID None has connected to Gateway (Session ID: 3913c5824a621062df230f4e5a2f901c).
+2024-08-30 18:22:11,794 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:22:42,672 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:23:40,042 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:23:40,045 - INFO - logging in using static token
+2024-08-30 18:23:40,607 - INFO - Shard ID None has connected to Gateway (Session ID: 787f3ef544e0f31bb2e926917c62ad78).
+2024-08-30 18:23:50,437 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:24:20,672 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:24:33,677 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:24:58,253 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:25:37,174 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:25:37,176 - INFO - logging in using static token
+2024-08-30 18:25:39,453 - INFO - Shard ID None has connected to Gateway (Session ID: 913cbac0aa18c45fb897a30e2eeecccc).
+2024-08-30 18:26:57,966 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:27:40,360 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:30:55,096 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:30:55,098 - INFO - logging in using static token
+2024-08-30 18:30:55,628 - INFO - Shard ID None has connected to Gateway (Session ID: 313fc085d3d50fec5adb989c612ab7db).
+2024-08-30 18:33:32,016 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:34:52,824 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:35:44,094 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:36:32,524 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:36:32,526 - INFO - logging in using static token
+2024-08-30 18:36:33,114 - INFO - Shard ID None has connected to Gateway (Session ID: a7dfcf305b1c52c064715c850b0bb8f6).
+2024-08-30 18:36:45,194 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:37:54,613 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:38:35,973 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:39:41,757 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:41:16,342 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 18:43:40,179 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:43:40,181 - INFO - logging in using static token
+2024-08-30 18:43:40,723 - INFO - Shard ID None has connected to Gateway (Session ID: dd4bf3cd2f53cdefa48d09e3a3441994).
+2024-08-30 18:44:28,915 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:44:28,915 - INFO - logging in using static token
+2024-08-30 18:44:29,544 - INFO - Shard ID None has connected to Gateway (Session ID: 8aba1d42e94c1beb417a6a6433d95ef3).
+2024-08-30 18:47:43,417 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:47:43,418 - INFO - logging in using static token
+2024-08-30 18:47:44,012 - INFO - Shard ID None has connected to Gateway (Session ID: e242bd0c1b9e5ec6bab8345688d78eb0).
+2024-08-30 18:48:04,920 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2024-08-30 18:49:37,131 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:49:37,134 - INFO - logging in using static token
+2024-08-30 18:49:37,973 - INFO - Shard ID None has connected to Gateway (Session ID: 49ae5b9042400733988430c0f66c2193).
+2024-08-30 18:50:01,714 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2024-08-30 18:58:30,148 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 18:58:30,151 - INFO - logging in using static token
+2024-08-30 18:58:30,682 - INFO - Shard ID None has connected to Gateway (Session ID: e38b18de7bd7e83cefa44e477ea0e102).
+2024-08-30 19:01:25,572 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:01:25,574 - INFO - logging in using static token
+2024-08-30 19:01:26,434 - INFO - Shard ID None has connected to Gateway (Session ID: 18f2a09a730cf01ea0f80b2e99de37e5).
+2024-08-30 19:01:40,235 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2024-08-30 19:02:51,807 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:02:51,810 - INFO - logging in using static token
+2024-08-30 19:02:52,590 - INFO - Shard ID None has connected to Gateway (Session ID: f8754ddbe5ac088ddf084fc1698faa2f).
+2024-08-30 19:03:12,865 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:04:25,364 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:06:41,480 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2024-08-30 19:07:02,962 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:07:02,964 - INFO - logging in using static token
+2024-08-30 19:07:03,490 - INFO - Shard ID None has connected to Gateway (Session ID: 26a51b4b89c75baabd5eb2d4ac8667dc).
+2024-08-30 19:07:17,913 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:08:01,843 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:08:40,490 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:08:40,492 - INFO - logging in using static token
+2024-08-30 19:08:41,094 - INFO - Shard ID None has connected to Gateway (Session ID: c4bcdaf108dfa34ab61521633f45f5ce).
+2024-08-30 19:08:56,755 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:09:30,987 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:09:30,988 - INFO - logging in using static token
+2024-08-30 19:09:31,607 - INFO - Shard ID None has connected to Gateway (Session ID: d5476e6fcd0af14bd3215d94ed6265d6).
+2024-08-30 19:09:45,122 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:10:43,535 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:11:23,780 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:12:28,907 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:13:03,727 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:14:15,323 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:14:49,198 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:15:31,594 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:15:43,679 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:16:17,095 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:16:55,667 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:17:28,950 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:18:10,316 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:18:37,580 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:19:04,898 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:19:58,746 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:20:29,957 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:20:57,234 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:34:00,006 - INFO - Shard ID None session has been invalidated.
+2024-08-30 19:34:05,650 - INFO - Shard ID None has connected to Gateway (Session ID: d85881fd4452efafaaa731134f78f9f2).
+2024-08-30 19:35:52,252 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:35:52,253 - INFO - logging in using static token
+2024-08-30 19:35:52,929 - INFO - Shard ID None has connected to Gateway (Session ID: ff8fd2c588c49e26f213986265249a0a).
+2024-08-30 19:36:16,472 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:37:33,139 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:37:33,141 - INFO - logging in using static token
+2024-08-30 19:37:33,741 - INFO - Shard ID None has connected to Gateway (Session ID: 3ec3c4c33d5e7cb4b47ba82a94fae9c0).
+2024-08-30 19:37:43,431 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:42:43,643 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:42:43,646 - INFO - logging in using static token
+2024-08-30 19:42:44,570 - INFO - Shard ID None has connected to Gateway (Session ID: 61c1291a9ed0415111a09bc71f682db1).
+2024-08-30 19:43:34,527 - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-08-30 19:43:34,529 - INFO - logging in using static token
+2024-08-30 19:43:35,130 - INFO - Shard ID None has connected to Gateway (Session ID: b827f4f5604c85b97c457170df0bcaac).
+2024-08-30 19:43:40,106 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:44:43,798 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:46:01,829 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-08-30 19:46:25,536 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
