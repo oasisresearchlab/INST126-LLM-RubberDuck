@@ -103,12 +103,14 @@ async def send_message(message: Message, user_message: str) -> None:
             threadId=message.channel.id if message_type=="Thread" else ""
             userId=message.author.id
             messageId=message.id
+            uniqueId=generate_unique_id()
+            user_message_copy=re.sub(r'<@!?[0-9]+>', '', user_message).strip().lower()
 
             #Log the data in google sheets
-            log_to_google_sheets({"ID":generate_unique_id(),"Discord Handle":message.author.display_name,"User Query":user_message,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
+            log_to_google_sheets({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
 
             #Log to a file
-            log_to_csv({"ID":generate_unique_id(),"Discord Handle":message.author.display_name,"User Query":user_message,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
+            log_to_csv({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
 
             response_chunks = split_message(response)
             
@@ -154,7 +156,7 @@ async def on_message(message: Message) -> None:
     # Reset the model back to omni when the user enters a new message
     MODEL="GPT-4o"
 
-    message_copy=user_message.replace(f'<@{client.user.id}>', '').strip().lower()
+    message_copy = re.sub(r'<@!?[0-9]+>', '', user_message).strip().lower()
 
     # Handle the !about command
     if user_message.startswith('!about'):
