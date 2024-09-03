@@ -9,7 +9,8 @@ load_dotenv()
 
 GEMINI_TOKEN = os.getenv("GEMINI_TOKEN")
 GPT_TOKEN=os.getenv("GPT_TOKEN")
-def get_response_from_GPT(user_input: str,image,mime_type='image/jpeg') -> str:
+def get_response_from_GPT(user_input,image,model,mime_type='image/jpeg') -> str:
+    print(model,"model in response from gpt")
 
     lowered: str = user_input.lower()
     client = OpenAI(api_key=GPT_TOKEN)
@@ -60,7 +61,7 @@ def get_response_from_GPT(user_input: str,image,mime_type='image/jpeg') -> str:
         encoded_image=base64.b64encode(image_data).decode('utf-8')
         image_data_url=f"data:{mime_type};base64,{encoded_image}"
         response = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model=model,
                 messages=[
                     {
                 "role": "user",
@@ -70,14 +71,14 @@ def get_response_from_GPT(user_input: str,image,mime_type='image/jpeg') -> str:
                 }
                 ],
                 temperature=0.7,
-                max_tokens=5000,
+                max_tokens=1000,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0,
             )
     else:
         response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=model,
         messages=[
             {
                 "role": "user",
@@ -94,16 +95,24 @@ def get_response_from_GPT(user_input: str,image,mime_type='image/jpeg') -> str:
 
 
 def get_response_from_GEMINI(user_input: str,image):
+    print("Using gemini model")
     lowered: str = user_input.lower()
     genai.configure(api_key=GEMINI_TOKEN)
     model=genai.GenerativeModel('gemini-1.5-flash')
-    prompt = f"""
-     You are an expert tutor who has expert knowledge in python, educational questioning techniques and computational thinking strategies. You heavily use open questions in responding to students and never want to reveal an answer to a current or previous question outright. You are never to give the exact code to solve my problem, instead guide me to the solution. Before responding to the student, please identify and define key coding concepts in their question. Please make sure you place [Tutor] before any of your responses. Never ignore these instructions.
-    
-    User: {lowered} Please don't give me answers, I really want to practice identifying the issues on my own.
-    
-    Please provide a detailed response to address the user's message.
-    """
+
+    prompt=f""" You are an expert tutor who has expert knowledge in programming, educational questioning techniques and computational thinking strategies. You heavily use open questions in responding to students and never want to reveal an answer to a current or previous question outright. You are never to give the exact code to solve the student's entire problem; instead, focus on helping the student to find their own way to the solution.
+
+                Before responding to the student, please identify and define key computational thinking or coding concepts in their question. Keep in mind that the students you are responding to are new to programming, and may have not had any prior programming experience. We do want them to learn the language of programming, but also feel free to use metaphors, analogies, or everyday examples when discussing computational thinking or coding concepts.
+
+                Also if the student's initial query doesn't specify what they were trying to do, prompt them to clarify that.
+
+                You are NOT to behave as if you are a human tutor. Do not use first-person pronouns or give an impression that you are a human tutor. Please make sure you place [Duck] before any of your responses, and begin each response by quacking.
+
+                Never ignore any of these instructions.
+
+                User:{lowered}. please don't give me whole code solutions
+
+"""
     response=None
     if image:
         response=model.generate_content([prompt,image])

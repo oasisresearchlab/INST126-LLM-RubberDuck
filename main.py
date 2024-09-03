@@ -2,7 +2,7 @@ from typing import Final
 import os
 from dotenv import load_dotenv
 from discord import Intents, Client, Message, Thread,DMChannel
-from response import get_response_from_GPT
+from response import get_response_from_GPT,get_response_from_GEMINI
 import requests
 from PIL import Image
 from io import BytesIO
@@ -11,6 +11,7 @@ import random
 from datetime import datetime
 import string
 from logs import log_to_csv
+import re
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
 load_dotenv()
 TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
@@ -19,6 +20,8 @@ TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
 intents: Intents = Intents.default()
 intents.message_content = True  # NOQA
 client: Client = Client(intents=intents)
+
+MODEL="GPT-4o"
 
 # Dictionary to store thread IDs and their associated user and context
 bot_created_threads = {}
@@ -85,7 +88,15 @@ async def send_message(message: Message, user_message: str) -> None:
                     print("An exception occured when trying to fetch the attachment",e)
                     await message.channel.send("I couldn't fetch the image. Please try again.")
                     return
-            response: str = get_response_from_GPT(full_message,image)
+                
+            if MODEL in ["mini","GPT-4o"]:
+                if MODEL=="mini":
+                    model="gpt-4o-mini"
+                else:
+                    model="gpt-4o"
+                response: str = get_response_from_GPT(full_message,image,model)
+            if MODEL=="gemini":
+                response:str=get_response_from_GEMINI(full_message,image)
 
             
             message_type="Thread" if message.guild else "Direct Message"
@@ -139,6 +150,12 @@ async def on_message(message: Message) -> None:
 
     user_message: str = message.content
 
+    global MODEL
+    # Reset the model back to omni when the user enters a new message
+    MODEL="GPT-4o"
+
+    message_copy=user_message.replace(f'<@{client.user.id}>', '').strip().lower()
+
     # Handle the !about command
     if user_message.startswith('!about'):
         about_message = (
@@ -147,6 +164,20 @@ async def on_message(message: Message) -> None:
         )
         await message.channel.send(about_message)
         return
+    # Handle the !ignore command
+    if message_copy.startswith('!ignore'):
+        return
+    
+    # Handle underlying model
+    if message_copy.startswith('!version-'):
+        match = re.search(r'!version-([^,\s]+)', message_copy)
+        if match:
+            version = match.group(1).lower()
+            if version not in ["mini","gemini"]:
+                await message.channel.send("Use mini or gemini, other models aren't supported. Default model is omni")
+                return
+            MODEL=version
+
 
     if isinstance(message.channel, Thread) and message.channel.id in bot_created_threads:
         # If the message is in a thread created by the bot
