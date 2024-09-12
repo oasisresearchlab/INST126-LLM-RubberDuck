@@ -185,7 +185,7 @@ async def on_message(message: Message) -> None:
         )
         await message.channel.send(about_message)
         return
-    # Handle the !ignore command
+    # Handle the !ignore  command
     if message_copy.startswith('!ignore'):
         return
     
