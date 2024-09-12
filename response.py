@@ -92,10 +92,12 @@ def get_response_from_GPT(user_input,image,model,mime_type='image/jpeg') -> str:
     return response.choices[0].message.content
 
 
-def get_response_from_GEMINI(user_input: str,image):
+def get_response_from_GEMINI(user_input: str,image,model_name):
     lowered: str = user_input.lower()
     genai.configure(api_key=GEMINI_TOKEN)
-    model=genai.GenerativeModel('gemini-1.5-flash')
+    
+    model=genai.GenerativeModel(model_name)
+    print(model_name)
 
     prompt=f""" You are an expert tutor who has expert knowledge in programming, educational questioning techniques and computational thinking strategies. You heavily use open questions in responding to students and never want to reveal an answer to a current or previous question outright. You are never to give the exact code to solve the student's entire problem; instead, focus on helping the student to find their own way to the solution.
 
