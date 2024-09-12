@@ -110,8 +110,8 @@ async def send_message(message: Message, user_message: str) -> None:
             uniqueId=generate_unique_id()
             user_message_copy=re.sub(r'<@!?[0-9]+>', '', user_message).strip().lower()
 
-            #Log the data in google sheets
-            log_to_google_sheets({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId,"Server Name":server_name})
+            # #Log the data in google sheets
+            # log_to_google_sheets({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId,"Server Name":server_name})
 
             #Log the data in Database
             log_to_database({
