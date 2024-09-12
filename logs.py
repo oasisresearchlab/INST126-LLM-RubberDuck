@@ -51,7 +51,7 @@ def log_to_csv(log_data: dict):
         with open(log_file_path, 'a', newline='') as csvfile:
             fieldnames = [
                 "ID", "Discord Handle", "User Query", "Bot Response", "Time Stamp", 
-                "Message Type", "Image URL", "Thread ID", "User Id", "Message Id"
+                "Message Type", "Image URL", "Thread ID", "User Id", "Message Id","Server Name"
             ]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             

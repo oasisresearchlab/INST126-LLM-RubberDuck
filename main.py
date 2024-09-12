@@ -12,6 +12,7 @@ from datetime import datetime
 import string
 from logs import log_to_csv
 import re
+from databaseHandler import log_to_database
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
 load_dotenv()
 TOKEN: Final[str] = os.getenv('DISCORD_TOKEN')
@@ -95,11 +96,14 @@ async def send_message(message: Message, user_message: str) -> None:
                 else:
                     model="gpt-4o"
                 response: str = get_response_from_GPT(full_message,image,model)
-            if MODEL=="gemini":
-                response:str=get_response_from_GEMINI(full_message,image)
+            if MODEL=="gemini" or MODEL=="gemini-pro":
+                modelName="gemini-1.5-flash" if MODEL=="gemini" else "gemini-1.5-pro"
+                response:str=get_response_from_GEMINI(full_message,image,modelName)
+            
 
             
             message_type="Thread" if message.guild else "Direct Message"
+            server_name=message.guild.name if message_type=='Thread' else ""
             threadId=message.channel.id if message_type=="Thread" else ""
             userId=message.author.id
             messageId=message.id
@@ -107,10 +111,25 @@ async def send_message(message: Message, user_message: str) -> None:
             user_message_copy=re.sub(r'<@!?[0-9]+>', '', user_message).strip().lower()
 
             #Log the data in google sheets
-            log_to_google_sheets({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
+            log_to_google_sheets({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId,"Server Name":server_name})
+
+            #Log the data in Database
+            log_to_database({
+                    "id": uniqueId,  
+                    "discord_handle": message.author.display_name, 
+                    "user_query": user_message_copy,  
+                    "bot_response": response,  
+                    "timestamp": get_current_timestamp(), 
+                    "message_type": message_type,  
+                    "image_url": msg_images[0] if len(msg_images) == 1 else "",  
+                    "thread_id": threadId,  
+                    "user_id": userId, 
+                    "message_id": messageId,  
+                    "server_name": server_name 
+                })
 
             #Log to a file
-            log_to_csv({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId})
+            log_to_csv({"ID":uniqueId,"Discord Handle":message.author.display_name,"User Query":user_message_copy,"Bot Response":response,"Time Stamp":get_current_timestamp(),"Message Type":message_type,"Image URL":msg_images[0] if len(msg_images)==1 else "","Thread ID":threadId,"User Id":userId,"Message Id":messageId,"Server Name":server_name})
 
             response_chunks = split_message(response)
             
@@ -175,7 +194,7 @@ async def on_message(message: Message) -> None:
         match = re.search(r'!version-([^,\s]+)', message_copy)
         if match:
             version = match.group(1).lower()
-            if version not in ["mini","gemini"]:
+            if version not in ["mini","gemini","gemini-pro"]:
                 await message.channel.send("Use mini or gemini, other models aren't supported. Default model is omni")
                 return
             MODEL=version
