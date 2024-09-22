@@ -10,6 +10,19 @@ MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 MYSQL_USER = os.getenv('MYSQL_USER')
 MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
 
+USER_LIST = [
+    'Elias Gonzalez', 
+    'Dr. Chan (Instructor)', 
+    'Umesh (Grader)', 
+    'Introduction to programming', 
+    'Umesh'
+]
+
+def get_discord_handle(user: str) -> str:
+    if user in USER_LIST:
+        return user
+    return ""
+
 load_dotenv()
 def connect_to_database():
     global connection
@@ -27,6 +40,11 @@ def connect_to_database():
             print(f"Error connecting to MySQL: {e}")
     return connection
 
+def contains_code(bot_response):
+    if "```" in bot_response:
+        return True
+    return False
+
 # Function to log data to the database
 def log_to_database(log_data: dict):
     try:
@@ -39,9 +57,10 @@ def log_to_database(log_data: dict):
         INSERT INTO bot_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
         VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
         """
+        discord_handle = get_discord_handle(log_data.get("discord_handle", ""))
         values = (
             log_data['id'],
-            log_data["discord_handle"],
+            discord_handle,
             log_data["user_query"],
             log_data["bot_response"],
             log_data["timestamp"],
@@ -55,6 +74,27 @@ def log_to_database(log_data: dict):
         cursor.execute(query, values)
         connection.commit()
         print("Log inserted into MySQL database.")
+
+        if contains_code(log_data["bot_response"]):
+            code_query = """
+            INSERT INTO bot_code_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, thread_id, user_id, message_id, server_name)
+            VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            code_values = (
+                log_data['id'],
+                discord_handle,
+                log_data["user_query"],
+                log_data["bot_response"],
+                log_data["timestamp"],
+                log_data["message_type"],
+                log_data["thread_id"],
+                log_data["user_id"],
+                log_data["message_id"],
+                log_data["server_name"]
+            )
+            cursor.execute(code_query, code_values)
+            connection.commit()
+            print("Code log inserted into bot_code_logs.")
     except Error as e:
         print(f"Error inserting into MySQL: {e}")
     finally:
