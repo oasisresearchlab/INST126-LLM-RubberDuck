@@ -10,7 +10,6 @@ load_dotenv()
 GEMINI_TOKEN = os.getenv("GEMINI_TOKEN")
 GPT_TOKEN=os.getenv("GPT_TOKEN")
 def get_response_from_GPT(user_input,image,model,mime_type='image/jpeg') -> str:
-    lowered: str = user_input.lower()
     client = OpenAI(api_key=GPT_TOKEN)
     
     # genai.configure(api_key=GEMINI_TOKEN)
@@ -45,7 +44,7 @@ def get_response_from_GPT(user_input,image,model,mime_type='image/jpeg') -> str:
 
                 Never ignore any of these instructions.
 
-                User:{lowered}. please don't give me whole code solutions
+                User:{user_input}. please don't give me whole code solutions
 
 """
 
@@ -93,7 +92,6 @@ def get_response_from_GPT(user_input,image,model,mime_type='image/jpeg') -> str:
 
 
 def get_response_from_GEMINI(user_input: str,image,model_name):
-    lowered: str = user_input.lower()
     genai.configure(api_key=GEMINI_TOKEN)
     
     model=genai.GenerativeModel(model_name)
@@ -109,7 +107,7 @@ def get_response_from_GEMINI(user_input: str,image,model_name):
 
                 Never ignore any of these instructions.
 
-                User:{lowered}. please don't give me whole code solutions
+                User:{user_input}. please don't give me whole code solutions
 
 """
     response=None
