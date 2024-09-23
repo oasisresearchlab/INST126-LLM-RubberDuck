@@ -57,10 +57,10 @@ def log_to_database(log_data: dict):
         INSERT INTO bot_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
         VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
         """
-        discord_handle = get_discord_handle(log_data.get("discord_handle", ""))
+
         values = (
             log_data['id'],
-            discord_handle,
+            log_data["discord_handle"],
             log_data["user_query"],
             log_data["bot_response"],
             log_data["timestamp"],
@@ -77,21 +77,22 @@ def log_to_database(log_data: dict):
 
         if contains_code(log_data["bot_response"]):
             code_query = """
-            INSERT INTO bot_code_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, thread_id, user_id, message_id, server_name)
-            VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
+        INSERT INTO bot_code_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
+        VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
+        """
             code_values = (
-                log_data['id'],
-                discord_handle,
-                log_data["user_query"],
-                log_data["bot_response"],
-                log_data["timestamp"],
-                log_data["message_type"],
-                log_data["thread_id"],
-                log_data["user_id"],
-                log_data["message_id"],
-                log_data["server_name"]
-            )
+            log_data['id'],
+            log_data["discord_handle"],
+            log_data["user_query"],
+            log_data["bot_response"],
+            log_data["timestamp"],
+            log_data["message_type"],
+            log_data["image_url"],
+            log_data["thread_id"],
+            log_data["user_id"],
+            log_data["message_id"],
+            log_data["server_name"]
+        )
             cursor.execute(code_query, code_values)
             connection.commit()
             print("Code log inserted into bot_code_logs.")
