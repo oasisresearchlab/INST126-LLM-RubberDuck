@@ -23,6 +23,13 @@ def get_discord_handle(user: str) -> str:
         return user
     return ""
 
+def redact_name_in_bot_response(discord_handle,bot_response):
+    if discord_handle in bot_response:
+        bot_response=bot_response.replace(discord_handle,"[redacted_name]")
+    return bot_response
+
+
+
 load_dotenv()
 def connect_to_database():
     global connection
@@ -75,6 +82,31 @@ def log_to_database(log_data: dict):
         connection.commit()
         print("Log inserted into MySQL database.")
 
+        #Here add more code to insert data into annonymized_code_logs
+        query = """
+        INSERT INTO anonymized_bot_logs (id, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
+        """
+
+        #Remove name in bot_response.
+        bot_response_with_redacted_name=redact_name_in_bot_response(log_data["discord_handle"],log_data["bot_response"])
+
+        values = (
+            log_data['id'],
+            log_data["user_query"],
+            bot_response_with_redacted_name,
+            log_data["timestamp"],
+            log_data["message_type"],
+            log_data["image_url"],
+            log_data["thread_id"],
+            log_data["user_id"],
+            log_data["message_id"],
+            log_data["server_name"]
+        )
+        cursor.execute(query, values)
+        connection.commit()
+        print("Log inserted into MySQL database in anonymized_bot_logs.")
+
         if contains_code(log_data["bot_response"]):
             code_query = """
         INSERT INTO bot_code_logs (id,discord_handle, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
@@ -96,6 +128,25 @@ def log_to_database(log_data: dict):
             cursor.execute(code_query, code_values)
             connection.commit()
             print("Code log inserted into bot_code_logs.")
+            code_query = """
+        INSERT INTO anonymized_bot_code_logs (id, user_query, bot_response, timestamp, message_type, image_url, thread_id, user_id, message_id,server_name)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
+        """
+            code_values = (
+            log_data['id'],
+            log_data["user_query"],
+            bot_response_with_redacted_name,
+            log_data["timestamp"],
+            log_data["message_type"],
+            log_data["image_url"],
+            log_data["thread_id"],
+            log_data["user_id"],
+            log_data["message_id"],
+            log_data["server_name"]
+        )
+            cursor.execute(code_query, code_values)
+            connection.commit()
+            print("Code log inserted into annonymized_bot_code_logs.")
     except Error as e:
         print(f"Error inserting into MySQL: {e}")
     finally:
