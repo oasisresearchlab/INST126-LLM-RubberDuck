@@ -2,15 +2,18 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google.oauth2.service_account import Credentials
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define the scope for Google Drive API access
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
 # Path to the service account JSON file
-SERVICE_ACCOUNT_FILE = '/Users/umeshchandra/Downloads/discordbotlogs-437319-4f5c9b110df9.json'
+SERVICE_ACCOUNT_FILE = ''
 
 # Google Drive folder ID where the files should be uploaded
-FOLDER_ID = '14HsEP6be1-RcVYP4e8qaaUula1IjTYaU'
+FOLDER_ID = os.getenv('FOLDER_ID')
 
 def upload_to_drive(logs_filename, code_logs_filename):
     filenames = [logs_filename, code_logs_filename]
