@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 logging.basicConfig(
-    filename='bot.log',  # Replace with the actual path on your EC2 instance
-    level=logging.INFO,  # Log level can be DEBUG, INFO, WARNING, ERROR, or CRITICAL
+    filename='bot.log', 
+    level=logging.INFO,  
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
