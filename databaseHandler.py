@@ -36,10 +36,10 @@ def connect_to_database():
     if connection is None or not connection.is_connected():
         try:
             connection = mysql.connector.connect(
-                host='34.205.204.68',  
-                database='INST126_BOT_LOGS',
-                user='joel',
-                password='oasislab@123O'
+                host=MYSQL_HOST,  
+                database=MYSQL_DATABASE,
+                user=MYSQL_USER,
+                password=MYSQL_PASSWORD
             )
             if connection.is_connected():
                 print("Connected to MySQL database")
